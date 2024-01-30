@@ -1,0 +1,13 @@
+services:
+  consierge-history:
+    env_file:
+      - .env
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+
+
+
+  
+

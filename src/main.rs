@@ -16,7 +16,7 @@ mod save_message;
 mod db;
 
 
-use save_message::save_message;
+use save_message::{save_message, get_message};
 use db::Database;
 
 #[tokio::main]
@@ -34,8 +34,9 @@ async fn main() {
         .allow_origin(Any);
 
     let app = Router::new()
-        .route("/messageHistory/v2.0/ping", get(ping))
-        .route("/messageHistory/v2.0/save", post(save_message))
+        .route("/messageHistory/v1.0/ping", get(ping))
+        .route("/messageHistory/v1.0/save", post(save_message))
+        .route("/messageHistory/v1.0/get", get(get_message))
         .with_state(db)
         .layer(cors)
         .layer(TraceLayer::new_for_http());
